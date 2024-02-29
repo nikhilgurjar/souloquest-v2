@@ -15,8 +15,6 @@ export async function POST(req) {
       );
     }
 
-    console.log(`tourCompanyId: ${tourCompanyId}`);
-
     const reqBody = await req.json();
     const {
       title,
@@ -57,7 +55,6 @@ export async function POST(req) {
         { status: 400 }
       );
     }
-    console.log(tourTemplate?.tourCompany);
 
     const response = await CompanyBooking.create({
       title,
@@ -79,7 +76,6 @@ export async function POST(req) {
       { status: 200 }
     );
   } catch (error) {
-    console.log(error);
     return NextResponse.json(
       { message: "An error occurred while registering the tourCompany." },
       { status: 500 }

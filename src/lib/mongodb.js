@@ -1,7 +1,6 @@
 import mongoose from "mongoose";
 
 export const connectMongoDB = async () => {
-  console.log("tryingConnection");
   if (mongoose.connection.readyState !== 1) {
     try {
       const options = {

@@ -13,11 +13,13 @@ import { useBoolean } from "@/hooks/useBoolean";
 import Iconify from "@/components/iconify";
 import { useSnackbar } from "@/components/snackbar";
 import FormProvider, { RHFTextField } from "@/components/hook-form";
+import useApi from "@/actions/useCompanyApi";
 
 // ----------------------------------------------------------------------
 
 export default function AccountChangePassword() {
   const { enqueueSnackbar } = useSnackbar();
+  const api = useApi();
 
   const password = useBoolean();
 
@@ -56,12 +58,16 @@ export default function AccountChangePassword() {
 
   const onSubmit = handleSubmit(async (data) => {
     try {
-      await new Promise((resolve) => setTimeout(resolve, 500));
+      await api.post("updatePassword", {
+        oldPassword: data.oldPassword,
+        password: data.newPassword,
+      });
       reset();
       enqueueSnackbar("Update success!");
       console.info("DATA", data);
     } catch (error) {
       console.error(error);
+      enqueueSnackbar("Update failed!");
     }
   });
 

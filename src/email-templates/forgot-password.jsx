@@ -19,10 +19,10 @@ const baseUrl = process.env.VERCEL_URL
   ? `https://${process.env.VERCEL_URL}`
   : "";
 
-export const SouloquestConfirmationEmail = ({ passwordResetURL, name }) => (
+export const SouloquestForgotPass = ({ passwordResetURL, name }) => (
   <Html>
     <Head />
-    <Preview>Confirm your email address</Preview>
+    <Preview>Reset Your Password</Preview>
     <Body style={main}>
       <Container style={container}>
         <Section style={logoContainer}>
@@ -36,8 +36,8 @@ export const SouloquestConfirmationEmail = ({ passwordResetURL, name }) => (
 
         <Text style={heroText}>Hi {name}</Text>
         <Text style={heroText}>
-          Someone recently requested a password change for your Dropbox account.
-          If this was you, you can set a new password here:
+          Someone recently requested a password change for your Souloquest
+          account. If this was you, you can set a new password here:
         </Text>
 
         <Section style={btnContainer}>
@@ -154,7 +154,7 @@ export const SouloquestConfirmationEmail = ({ passwordResetURL, name }) => (
   </Html>
 );
 
-export default SouloquestConfirmationEmail;
+export default SouloquestForgotPass;
 
 const footerText = {
   fontSize: "12px",

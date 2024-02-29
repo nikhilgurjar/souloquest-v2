@@ -51,14 +51,12 @@ export const ToursProvider = ({ children }) => {
     const fetchTours = async () => {
       // Replace with your actual fetching logic
       let url;
-      console.log(`pathname: ${pathName}`);
       if (pathName === "/dashboard/tours/mytours") {
         url = "/tours?mytours=yes";
       } else {
         url = "/tours";
       }
       const fetchedTours = await api.get(url);
-      console.log(fetchedTours);
       dispatch({ type: SET_TOURS, payload: fetchedTours });
     };
 
@@ -75,7 +73,6 @@ export const ToursProvider = ({ children }) => {
       } else {
         url = `/tours?searchTerm=${searchString}`;
       }
-      console.log("api called");
       const fetchedTours = await api.get(url);
       dispatch({ type: SET_TOURS, payload: fetchedTours });
       return fetchedTours;
@@ -85,10 +82,7 @@ export const ToursProvider = ({ children }) => {
     }
   };
 
-  console.log(searchString);
-
   useEffect(() => {
-    console.log("called useeffect");
     debounce(getFilteredTours(), 10000);
   }, [searchString]);
 

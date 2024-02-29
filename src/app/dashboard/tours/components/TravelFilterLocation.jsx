@@ -8,11 +8,8 @@ const TravelFilterLocation = () => {
   const { setSearchString, searchString, loading } = useTours();
 
   const handleChange = (event) => {
-    console.log("search called");
     setSearchString(event.target.value);
   };
-
-  console.log(searchString);
 
   return (
     <InputBase

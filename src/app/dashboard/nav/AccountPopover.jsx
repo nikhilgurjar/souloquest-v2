@@ -31,7 +31,6 @@ export default function AccountPopover() {
   const { company, loading } = useCurrentCompany();
   const dispatch = useDispatch();
   const [user, setUser] = useState(null);
-  console.log(company, user);
   const { enqueueSnackbar } = useSnackbar();
   const router = useRouter();
   const [openPopover, setOpenPopover] = useState(null);

@@ -260,15 +260,11 @@ const NewTourForm = ({ isEdit, currentTour }) => {
 
   const onSubmit = async (data) => {
     try {
-      console.log("Data");
-      console.log(data);
       const imageUrls = [];
       for (let file of data?.images) {
         imageUrls.push(await handleUplaod(file));
       }
       const result = await Promise.all(imageUrls);
-      console.log("result:::::::::::::::::::::::;");
-      console.log(result);
       data.images = result;
 
       if (isEdit) {
@@ -280,10 +276,7 @@ const NewTourForm = ({ isEdit, currentTour }) => {
       enqueueSnackbar(!isEdit ? "Create success!" : "Update success!");
       router.push("/dashboard/tours/mytours");
       //  push(PATH_DASHBOARD.eCommerce.list);
-      // console.log("response", response);
-    } catch (error) {
-      console.error(error);
-    }
+    } catch (error) {}
   };
 
   const handleDrop = useCallback(
@@ -299,7 +292,6 @@ const NewTourForm = ({ isEdit, currentTour }) => {
     [setValue, values.images]
   );
 
-  console.log(values);
   const handleRemoveFile = (inputFile) => {
     const filtered =
       values.images && values.images?.filter((file) => file !== inputFile);

@@ -20,7 +20,6 @@ export function fileFormat(fileUrl) {
     Array.isArray(splittedUrl) && splittedUrl?.length > 1
       ? splittedUrl[0]
       : fileUrl;
-  console.log(fileUrl);
   switch (fileUrl?.includes(fileTypeByUrl(fileUrl))) {
     case FORMAT_TEXT.includes(fileTypeByUrl(fileUrl)):
       format = "txt";
@@ -116,8 +115,6 @@ export function fileNameByUrl(fileUrl) {
 // ----------------------------------------------------------------------
 export function fileData(file) {
   // Url
-  console.log("file type");
-  console.log(typeof file);
   if (typeof file === "string") {
     return {
       key: file,

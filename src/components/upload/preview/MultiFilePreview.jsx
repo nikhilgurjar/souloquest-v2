@@ -18,7 +18,6 @@ export default function MultiFilePreview({ thumbnail, files, onRemove, sx }) {
       {files.map((file) => {
         const { key, name = "", size = 0 } = fileData(file);
         const isNotFormatFile = typeof file === "string";
-        console.log(thumbnail);
         if (thumbnail) {
           return (
             <Stack

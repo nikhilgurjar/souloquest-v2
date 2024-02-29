@@ -28,11 +28,11 @@ const TABS = [
     label: "Social links",
     icon: <Iconify icon="solar:share-bold" width={24} />,
   },
-  // {
-  //   value: "security",
-  //   label: "Security",
-  //   icon: <Iconify icon="ic:round-vpn-key" width={24} />,
-  // },
+  {
+    value: "security",
+    label: "Security",
+    icon: <Iconify icon="ic:round-vpn-key" width={24} />,
+  },
 ];
 
 // ----------------------------------------------------------------------
@@ -69,7 +69,7 @@ export default function AccountView() {
 
       {currentTab === "social" && <AccountSocialLinks />}
 
-      {/* {currentTab === "security" && <AccountChangePassword />} */}
+      {currentTab === "security" && <AccountChangePassword />}
     </Container>
   );
 }

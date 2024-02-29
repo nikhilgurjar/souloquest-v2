@@ -11,7 +11,6 @@ export async function POST(req) {
   try {
     const { name, email, instagramLink, address, password, phoneNumber } =
       await req.json();
-    console.log(name, email, instagramLink, address, password);
     if (
       !name ||
       !email ||
@@ -31,7 +30,10 @@ export async function POST(req) {
     });
     if (existingCompany) {
       return NextResponse.json(
-        { message: "Company already exists." },
+        {
+          message:
+            "Company already exists. Please make sure email, phoneNumber and instagramLink are unique.",
+        },
         { status: 400 }
       );
     }
@@ -58,10 +60,9 @@ export async function POST(req) {
     const token = await getJWTToken({ tokenData, expirationTime: "1h" });
 
     const verificationURL = `${process.env.NEXT_APP_URL}/verify-email?token=${token}`;
-    //create token
 
     const data = await resend.emails.send({
-      from: "onboarding@resend.dev",
+      from: "noreply@souloquest.com",
       to: email,
       subject: "Welcome to Souloquest!! Please confirm your email address",
       react: SouloquestConfirmationEmail({
@@ -77,7 +78,6 @@ export async function POST(req) {
 
     return response;
   } catch (error) {
-    console.log(error);
     return NextResponse.json(
       { message: "An error occurred while registering the tourCompany." },
       { status: 500 }

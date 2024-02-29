@@ -48,7 +48,6 @@ export default function useTable(props) {
 
   const onSelectAllRows = useCallback((checked, inputValue) => {
     if (checked) {
-      console.log(inputValue);
       setSelected(inputValue);
       return;
     }

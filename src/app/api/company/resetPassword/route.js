@@ -1,23 +1,21 @@
 "use server";
-import SouloquestConfirmationEmail from "@/email-templates/welcome-email";
-import { getDataFromToken, getJWTToken } from "@/lib/helper";
+import SouloquestForgotPass from "@/email-templates/forgot-password";
+import { getJWTToken } from "@/lib/helper";
 import { connectMongoDB } from "@/lib/mongodb";
 import TourCompany from "@/models/TourCompany.model";
 import { resend } from "@/utils/resend";
 import { NextResponse } from "next/server";
 
-connectMongoDB();
-
-export async function GET(req) {
+export async function POST(req) {
   try {
-    const url = new URL(req.url);
-    const email = url.searchParams.get("email");
-
+    const { email } = await req.json();
     if (!email) {
-      return NextResponse.json({ error: "Email is required" }, { status: 400 });
+      return NextResponse.json({ message: "Missing Email." }, { status: 400 });
     }
 
-    const tourCompany = await TourCompany.findOne({ email: email });
+    await connectMongoDB();
+
+    const tourCompany = await TourCompany.findOne({ email });
     if (!tourCompany) {
       return NextResponse.json({ message: "User not found." }, { status: 409 });
     }
@@ -30,26 +28,26 @@ export async function GET(req) {
 
     const token = await getJWTToken({ tokenData, expirationTime: "1h" });
 
-    const verificationURL = `${process.env.NEXT_APP_URL}/verify-email?token=${token}`;
+    const verificationURL = `${process.env.NEXT_APP_URL}/new-password?token=${token}`;
     //create token
 
     const data = await resend.emails.send({
       from: "noreply@souloquest.com",
       to: email,
-      subject: "Welcome to Souloquest!! Please confirm your email address",
-      react: SouloquestConfirmationEmail({
-        validationURL: verificationURL,
+      subject: "Password reset request has been raised",
+      react: SouloquestForgotPass({
+        passwordResetURL: verificationURL,
         name: tourCompany.name,
       }),
     });
 
     return NextResponse.json(
-      { message: "Email sent. Please check inbox" },
-      { status: 200 }
+      { message: "Password reset link has been sent to your email." },
+      { status: 201 }
     );
   } catch (error) {
     return NextResponse.json(
-      { error: "something went wrong" },
+      { message: "An error occurred while registering the user." },
       { status: 500 }
     );
   }

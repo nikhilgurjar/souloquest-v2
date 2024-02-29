@@ -2,7 +2,7 @@
 import React, { useState } from "react";
 import { LoadingButton } from "@mui/lab";
 import useApi from "@/actions/useCompanyApi";
-import { useSearchParams } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { useSnackbar } from "@/components/snackbar";
 
 const VerifyButton = () => {
@@ -10,6 +10,7 @@ const VerifyButton = () => {
   const api = useApi();
   const searchParams = useSearchParams();
   const { enqueueSnackbar } = useSnackbar();
+  const router = useRouter();
 
   const handleClick = async () => {
     try {
@@ -18,9 +19,11 @@ const VerifyButton = () => {
         `verify-email?token=${searchParams.get("token")}`
       );
       enqueueSnackbar("Email verified successfully");
+      router.push("/login/company");
     } catch (error) {
-      console.log(error);
       enqueueSnackbar("Something went wrong", { variant: "error" });
+    } finally {
+      setLoading(false);
     }
   };
 

@@ -11,7 +11,6 @@ export async function POST(request) {
   try {
     const reqBody = await request.json();
     const { email, password } = reqBody;
-    console.log(reqBody);
 
     //check if tourCompany exists
     const tourCompany = await TourCompany.findOne({ email });
@@ -28,7 +27,6 @@ export async function POST(request) {
         { status: 400 }
       );
     }
-    console.log("tourCompany exists");
 
     //check if password is correct
     const validPassword = await bcryptjs.compare(
@@ -51,7 +49,8 @@ export async function POST(request) {
 
     const response = NextResponse.json({
       tourCompany: tourCompany,
-      message: "Login successful",
+      message:
+        "Login successful. Please check your email for email verification.",
       success: true,
     });
     response.cookies.set(process.env.COOKIE_NAME, token, {
@@ -61,9 +60,11 @@ export async function POST(request) {
       path: "/", // Accessible site-wide
       maxAge: 86400, // 24-hours or whatever you like
     });
-    console.log(response);
     return response;
   } catch (error) {
-    return NextResponse.json({ error: error.message }, { status: 500 });
+    return NextResponse.json(
+      { error: "something went wrong" },
+      { status: 400 }
+    );
   }
 }

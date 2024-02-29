@@ -11,12 +11,16 @@ connectMongoDB();
 export async function GET(request) {
   try {
     const tourCompanyId = await getDataFromToken(request);
-    if (!tourCompanyId) NextResponse.redirect("/login");
-    console.log(tourCompanyId);
+
+    if (!tourCompanyId)
+      return NextResponse.json(
+        { message: "Not Authenticated" },
+        { status: 401 }
+      );
+
     const user = await TourCompany.findOne({ _id: tourCompanyId }).select(
       "-password"
     );
-    console.log(user);
     if (!user) {
       return NextResponse.json(
         { error: "User does not exist" },
@@ -28,7 +32,9 @@ export async function GET(request) {
       tourCompany: user,
     });
   } catch (error) {
-    console.log(error);
-    return NextResponse.json({ error: error.message }, { status: 400 });
+    return NextResponse.json(
+      { error: "something went wrong" },
+      { status: 400 }
+    );
   }
 }

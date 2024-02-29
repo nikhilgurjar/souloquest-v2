@@ -36,7 +36,6 @@ export default function AccountGeneral() {
   const { company: user, loading } = useCurrentCompany();
   const dispatch = useDispatch();
   const api = useApi();
-  console.log(user);
 
   const UpdateUserSchema = Yup.object().shape({
     name: Yup.string()

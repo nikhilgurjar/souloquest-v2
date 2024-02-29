@@ -35,7 +35,7 @@ import { useSnackbar } from "@/components/snackbar";
 import Collapse from "@/components/collapse";
 import Iconify from "@/components/iconify";
 import { useParams, useRouter, useSearchParams } from "next/navigation";
-import { getDate, getDay } from "date-fns";
+import { format, getDate, getDay, isEqual } from "date-fns";
 import useApi from "@/actions/useCompanyApi";
 
 const BookingRequestForm = () => {
@@ -44,7 +44,6 @@ const BookingRequestForm = () => {
   const router = useRouter();
   const api = useApi();
 
-  console.log(tourId);
   const { enqueueSnackbar } = useSnackbar();
 
   useEffect(() => {
@@ -106,8 +105,6 @@ const BookingRequestForm = () => {
     defaultValues,
   });
 
-  console.log(tourDetail);
-
   const {
     reset,
     watch,
@@ -116,8 +113,6 @@ const BookingRequestForm = () => {
     control,
     formState: { isSubmitting, errors },
   } = methods;
-
-  console.log(errors);
 
   const {
     fields: bookingDetailFields,
@@ -132,11 +127,9 @@ const BookingRequestForm = () => {
     try {
       //  await new Promise((resolve) => setTimeout(resolve, 500));
       const booking = await api.post("bookings/add", data);
-      console.log(booking);
       enqueueSnackbar("Booking Created Successfully");
       router.push("/dashboard/bookings");
       //  push(PATH_DASHBOARD.eCommerce.list);
-      console.log("DATA", data);
     } catch (error) {
       console.error(error);
     }
@@ -383,7 +376,10 @@ const BookingRequestForm = () => {
                     minDate={tourDetail?.startDate}
                     shouldDisableDate={(date) => {
                       if (tourDetail?.frequency == "daily") {
-                        return true;
+                        return false;
+                      }
+                      if (!tourDetail?.recurrence) {
+                        return !isEqual(tourDetail?.startDate, date);
                       }
                       return !tourDetail?.frequencyWeekdays?.includes(
                         getDay(date)

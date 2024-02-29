@@ -24,14 +24,11 @@ export async function GET(req) {
     const page = parseInt(url.searchParams.get("page") || "1"); // Add page parameter
     const limit = 20; // Set pagination limit
     let query = {};
-    console.log(requested);
     if (requested) {
       query = { requestedBy: tourCompanyId };
     } else {
       query = { requestedBy: { $ne: tourCompanyId } }; // Fetch tours not created by user
     }
-
-    console.log(query);
 
     const bookings = await CompanyBooking.find(query)
       .select("-bookingDetails")
@@ -51,7 +48,9 @@ export async function GET(req) {
 
     return NextResponse.json({ bookings }, { status: 200 });
   } catch (error) {
-    console.log(error);
-    return NextResponse.json({ error: error.message }, { status: 500 });
+    return NextResponse.json(
+      { error: "something went wrong" },
+      { status: 400 }
+    );
   }
 }

@@ -45,8 +45,6 @@ const TourDetailPage = () => {
     getTourDetails();
   }, [tourId]);
 
-  console.log(tour);
-
   const slides = tour?.images?.map((slide) => ({
     src: slide,
   }));

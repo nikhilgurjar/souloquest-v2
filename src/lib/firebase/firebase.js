@@ -24,7 +24,6 @@ export const db = getFirestore(firebaseApp);
 export async function getAuthenticatedAppForUser(session = null) {
   if (typeof window !== "undefined") {
     // client
-    console.log("client: ", firebaseApp);
 
     return { app: firebaseApp, user: auth.currentUser.toJSON() };
   }
@@ -78,7 +77,6 @@ export async function getAuthenticatedAppForUser(session = null) {
 
     await signInWithCustomToken(auth, customToken);
   }
-  console.log("server: ", app);
   return { app, currentUser: auth.currentUser };
 }
 

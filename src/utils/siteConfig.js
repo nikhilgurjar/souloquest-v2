@@ -37,7 +37,7 @@ export const PATH_PAGE = {
   BOOKINGS_DETAIL: "/dashboard/bookings/:id",
   BOOKINGS_NEW: "/dashboard/bookings/create",
   CONTACT: "/contact",
-  PROFILE: "/dashboard/profile",
+  PROFILE: "/dashboard/account",
   PROFILE_EDIT: "/profile/edit",
   ABOUT: "/about",
   HOW_IT_WORKS: "/how_it_works",

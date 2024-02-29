@@ -8,7 +8,6 @@ await connectMongoDB();
 
 export async function GET(req) {
   try {
-    console.log("request to get tours with");
     const tourCompanyId = await getDataFromToken(req);
     if (!tourCompanyId) {
       return NextResponse.json(
@@ -30,8 +29,6 @@ export async function GET(req) {
     } else {
       query = { tourCompany: { $ne: tourCompanyId } }; // Fetch tours not created by user
     }
-
-    console.log(searchTerm);
 
     if (searchTerm) {
       query = {
@@ -56,7 +53,6 @@ export async function GET(req) {
 
     return NextResponse.json(tours, { status: 200 });
   } catch (error) {
-    console.log(error);
     return NextResponse.json({ error: error.message }, { status: 500 });
   }
 }

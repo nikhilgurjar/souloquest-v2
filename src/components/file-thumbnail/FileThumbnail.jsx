@@ -10,12 +10,8 @@ export default function FileThumbnail({
   sx,
   imgSx,
 }) {
-  console.log("file preview");
-  console.log(file);
   const { name = "", path = "", preview = "" } = fileData(file);
   const format = fileFormat(path || preview);
-  console.log(format);
-  console.log(preview);
 
   const renderContent =
     format === "image" && imageView ? (

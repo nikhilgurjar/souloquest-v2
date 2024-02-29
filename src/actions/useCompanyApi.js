@@ -22,7 +22,6 @@ export default function useApi() {
         enqueueSnackbar("Please login first", { variant: "error" });
         router.push("/login/company");
       }
-      console.log(error);
       const message =
         error?.response?.data?.error ||
         error?.response?.data?.message ||
@@ -39,13 +38,11 @@ export default function useApi() {
 
   const makeRequest = async ({ url, method, data }) => {
     try {
-      console.log("going for request");
       const response = await api({
         url,
         method,
         data,
       });
-      console.log("response: " + JSON.stringify(response));
       return response.data;
     } catch (error) {
       throw error;

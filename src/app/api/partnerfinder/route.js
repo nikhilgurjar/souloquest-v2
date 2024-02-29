@@ -19,7 +19,6 @@ export async function GET(req) {
 
     if (!departureDate) {
       const requests = await PartnerModel.find().limit(10).lean();
-      console.log(requests);
       return NextResponse.json(requests, { status: 200 });
     }
     departureDate = parseDate(departureDate);
@@ -40,7 +39,6 @@ export async function GET(req) {
     }).limit(20);
     return NextResponse.json(requests, { status: 200 });
   } catch (error) {
-    console.log(error);
     return NextResponse.json({ error: error.message }, { status: 500 });
   }
 }
@@ -67,8 +65,6 @@ export async function POST(req) {
         { status: 400 }
       );
     }
-    console.log(departureDate, location, description, title);
-    console.log("reaching here");
     departureDate = parseDate(departureDate);
 
     const chatRoom = await ChatRoomModel.create({
@@ -87,10 +83,8 @@ export async function POST(req) {
       title,
       room_id: chatRoom._id,
     });
-    console.log("success");
     return NextResponse.json(requests, { status: 200 });
   } catch (error) {
-    console.log(error);
     return NextResponse.json({ error: error.message }, { status: 500 });
   }
 }

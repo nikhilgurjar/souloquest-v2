@@ -8,6 +8,22 @@ import AuthLoginForm from "./AuthLoginForm";
 import NextLink from "next/link";
 import LoginRightPane from "../LoginRightPane";
 
+export const metadata = {
+  title: "Souloquest Login",
+  description: "Login to best travel b2b platform and fill your tours faster",
+  keywords: [
+    "best travel agency",
+    "Delhi to kashmir trip",
+    "Katra to kashmir trip",
+    "Best places to visit in kashmir",
+    "Best things to do in kashmir",
+    "Dal lake",
+    "Must have place to visit in dwarka",
+    "meghalaya trip",
+    "best b2b travel agent package",
+  ],
+};
+
 const LoginPage = () => {
   return (
     <Stack direction="row" sx={{ minHeight: 1 }}>

@@ -28,7 +28,6 @@ export default function InvoiceTableFilterResult({
     onFilters("startDate", null);
   };
 
-  console.log(filters.startDate);
   return (
     <Stack spacing={1.5} {...other}>
       <Box sx={{ typography: "body2" }}>

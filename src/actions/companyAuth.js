@@ -18,7 +18,6 @@ const apiRequest = async ({ url, method = "GET", data, headers = {} }) => {
   return new Promise((resolve, reject) => {
     axios(axiosConfig)
       .then((response) => {
-        console.log(response);
         resolve(response.data);
       })
       .catch((error) => {

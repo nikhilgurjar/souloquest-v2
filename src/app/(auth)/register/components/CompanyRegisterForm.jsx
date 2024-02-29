@@ -8,7 +8,13 @@ import { useState } from "react";
 import NextLink from "next/link";
 // @mui
 import { LoadingButton } from "@mui/lab";
-import { Stack, Link, IconButton, InputAdornment } from "@mui/material";
+import {
+  Stack,
+  Link,
+  IconButton,
+  InputAdornment,
+  Typography,
+} from "@mui/material";
 // routes
 // components
 import Iconify from "@/components/iconify";
@@ -72,7 +78,7 @@ const CompanyRegisterForm = () => {
     reset,
     handleSubmit,
     setError,
-    formState: { isSubmitting },
+    formState: { isSubmitting, errors },
   } = methods;
 
   const handleShowPassword = () => {
@@ -93,21 +99,18 @@ const CompanyRegisterForm = () => {
         phoneNumber,
       });
       dispatch(loginInCompany({ tourCompany: res.tourCompany }));
-      enqueueSnackbar("Successfully Registered");
-      console.log(res);
-      router.push("/dashboard");
+      enqueueSnackbar("Successfully Registered. Please check your email");
     } catch (error) {
-      console.log(error);
       enqueueSnackbar(
         error || error.error || error.message || "Something went wrong",
         { variant: "error" }
       );
 
-      reset();
+      // reset();
       // const message = submitErrorHandler(error);
       setError("afterSubmit", {
         ...error,
-        message: error.error,
+        message: error.error || error.message,
       });
     }
   };
@@ -123,6 +126,22 @@ const CompanyRegisterForm = () => {
         alignItems: "center",
       }}
     >
+      {errors.afterSubmit && (
+        <Typography
+          variant="body2"
+          sx={{
+            color: "error.dark",
+            textAlign: "center",
+            backgroundColor: "grey.300",
+            p: 2,
+            borderRadius: 2,
+            marginBottom: 3,
+            maxWidth: "420px",
+          }}
+        >
+          {errors.afterSubmit?.message}
+        </Typography>
+      )}
       <Stack
         spacing={2.5}
         gap={2.5}

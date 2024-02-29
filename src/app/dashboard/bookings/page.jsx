@@ -16,7 +16,6 @@ const BookingPage = () => {
       const response = await api.get("bookings");
       setBookings(response.bookings);
     } catch (error) {
-      console.log(error);
     } finally {
       setLoading(false);
     }
@@ -29,8 +28,6 @@ const BookingPage = () => {
   if (loading) {
     return <SkeletonKanbanColumn />;
   }
-
-  console.log(bookings);
 
   return (
     <Container maxWidth={"lg"}>

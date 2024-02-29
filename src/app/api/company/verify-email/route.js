@@ -1,8 +1,9 @@
 "use server";
-import { getDataFromToken } from "@/lib/helper";
+import { getDataFromToken, getJwtSecretKey } from "@/lib/helper";
 import { connectMongoDB } from "@/lib/mongodb";
 import TourCompany from "@/models/TourCompany.model";
 import { NextResponse } from "next/server";
+import * as JOSE from "jose";
 
 connectMongoDB();
 
@@ -18,7 +19,9 @@ export async function GET(req) {
       );
     }
 
-    const tourCompanyId = await getDataFromToken(req);
+    const { payload } = await JOSE.jwtVerify(token, await getJwtSecretKey());
+
+    const tourCompanyId = payload.id;
     if (!tourCompanyId)
       return NextResponse.json(
         { message: "Please regenerate verification email" },
@@ -33,7 +36,7 @@ export async function GET(req) {
       );
     }
 
-    tourCompany.email_verified = true;
+    tourCompany.emailVerified = true;
     await tourCompany.save();
 
     return NextResponse.json(
@@ -41,7 +44,6 @@ export async function GET(req) {
       { status: 200 }
     );
   } catch (error) {
-    console.log(error);
     return NextResponse.json(
       { error: "something went wrong" },
       { status: 500 }

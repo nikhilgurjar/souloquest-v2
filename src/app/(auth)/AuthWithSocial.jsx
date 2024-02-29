@@ -8,9 +8,7 @@ const AuthWithSocial = () => {
   const handleGoogleLogin = () => {
     signIn("google", {
       redirect: false,
-    }).then((result) => {
-      console.log(result);
-    });
+    }).then((result) => {});
   };
   return (
     <Stack direction="row" spacing={2} justifyContent="center">

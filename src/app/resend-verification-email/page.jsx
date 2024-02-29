@@ -1,9 +1,6 @@
 "use client";
 import React from "react";
-import Iconify from "@/components/iconify";
 import { Stack } from "@mui/material";
-import Link from "next/link";
-import MUILink from "@mui/material/Link";
 import FormProvider, { RHFTextField } from "@/components/hook-form";
 import * as Yup from "yup";
 import { useForm } from "react-hook-form";
@@ -69,20 +66,6 @@ const ResendVerificationEmail = () => {
         >
           Resend Email
         </LoadingButton>
-
-        <MUILink
-          component={Link}
-          href={"/login/company"}
-          color="inherit"
-          variant="subtitle2"
-          sx={{
-            alignItems: "center",
-            display: "inline-flex",
-          }}
-        >
-          <Iconify icon="eva:arrow-ios-back-fill" width={16} />
-          Return to sign in
-        </MUILink>
       </Stack>
     </FormProvider>
   );

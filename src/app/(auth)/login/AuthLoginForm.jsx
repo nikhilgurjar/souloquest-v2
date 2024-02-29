@@ -10,7 +10,13 @@ import NextLink from "next/link";
 import { useSnackbar } from "@/components/snackbar";
 
 import { LoadingButton } from "@mui/lab";
-import { Stack, Link, IconButton, InputAdornment } from "@mui/material";
+import {
+  Stack,
+  Link,
+  IconButton,
+  InputAdornment,
+  Typography,
+} from "@mui/material";
 // routes
 // components
 import Iconify from "@/components/iconify";
@@ -51,7 +57,8 @@ const AuthLoginForm = ({ role }) => {
   const {
     reset,
     handleSubmit,
-    formState: { isSubmitting },
+    setError,
+    formState: { isSubmitting, errors },
   } = methods;
 
   const handleShowPassword = () => {
@@ -83,14 +90,19 @@ const AuthLoginForm = ({ role }) => {
           if (ok) {
             // router.push("/dashboard");
           } else {
-            console.log(error);
             enqueueSnackbar("Credentials do not match!", { variant: "error" });
           }
         });
       }
-      console.log("DATA", data);
     } catch (error) {
-      console.error(error);
+      enqueueSnackbar(
+        error || error.error || error.message || "Something went wrong",
+        { variant: "error" }
+      );
+      setError("afterSubmit", {
+        ...error,
+        message: error.error || error.message,
+      });
     }
   };
 
@@ -105,6 +117,23 @@ const AuthLoginForm = ({ role }) => {
         alignItems: "center",
       }}
     >
+      {errors.afterSubmit && (
+        <Typography
+          variant="body2"
+          sx={{
+            color: "error.dark",
+            textAlign: "center",
+            backgroundColor: "grey.300",
+            p: 2,
+            borderRadius: 2,
+            marginBottom: 3,
+            maxWidth: "420px",
+          }}
+        >
+          {errors.afterSubmit?.message}
+        </Typography>
+      )}
+
       <Stack
         spacing={2.5}
         gap={2.5}

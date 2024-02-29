@@ -18,9 +18,7 @@ export const getDataFromToken = async (request) => {
     if (!token) {
       return null;
     }
-    console.log(`token: ${token}`);
     const { payload } = await JOSE.jwtVerify(token, await getJwtSecretKey());
-    console.log(payload);
     return payload.id;
   } catch (error) {
     throw new Error(error.message);

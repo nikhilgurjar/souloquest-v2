@@ -19,7 +19,6 @@ const ResendCode = () => {
       );
       enqueueSnackbar("Mail Sent plese check your mail box");
     } catch (error) {
-      console.log(error);
       enqueueSnackbar("Something went wrong", { variant: "error" });
     }
   };

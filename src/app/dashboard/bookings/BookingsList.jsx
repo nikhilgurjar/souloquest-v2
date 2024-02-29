@@ -93,7 +93,6 @@ export default function BookingsList({ bookings, fetchBookings }) {
       });
       enqueueSnackbar("Booking accepted successfully");
       await fetchBookings();
-      console.log(table);
     } catch (error) {
       console.error(error);
       enqueueSnackbar("Error while accepting bookings", { variant: "error" });
@@ -107,15 +106,12 @@ export default function BookingsList({ bookings, fetchBookings }) {
         status: "rejected",
       });
       enqueueSnackbar("Booking rejected successfully");
-      console.log(table);
       await fetchBookings();
     } catch (error) {
       console.error(error);
       enqueueSnackbar("Error while rejecting bookings", { variant: "error" });
     }
   };
-
-  console.log(tableData);
 
   const denseHeight = table.dense ? 56 : 76;
 
@@ -247,7 +243,6 @@ export default function BookingsList({ bookings, fetchBookings }) {
                 table.onSelectAllRows(
                   checked,
                   tableData.map((row) => {
-                    console.log(row);
                     return row._id;
                   })
                 )

@@ -1,3 +1,4 @@
+"use server";
 import { connectMongoDB } from "@/lib/mongodb";
 import { NextResponse } from "next/server";
 import bcryptjs from "bcryptjs";
@@ -48,7 +49,6 @@ export async function POST(req) {
       { status: 201 }
     );
   } catch (error) {
-    console.log(error);
     return NextResponse.json(
       { message: "An error occurred while registering the user." },
       { status: 500 }

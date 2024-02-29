@@ -16,7 +16,6 @@ const RequestedBookingsPage = () => {
       const response = await api.get("bookings?requested=true");
       setBookings(response.bookings);
     } catch (error) {
-      console.log(error);
     } finally {
       setLoading(false);
     }

@@ -15,8 +15,6 @@ export async function POST(req) {
       );
     }
 
-    console.log(`tourCompanyId: ${tourCompanyId}`);
-
     const reqBody = await req.json();
     const { bookingIds, status } = reqBody;
 
@@ -27,20 +25,11 @@ export async function POST(req) {
       );
     }
 
-    console.log(status, bookingIds);
-
-    // Update Bookings
-    // const updatedBookings = await CompanyBooking.updateMany(
-    //   { _id: { $in: bookingIds } },
-    //   { $set: { status: status } }
-    // );
     for (let id in bookingIds) {
       const updatedBookings = await CompanyBooking.findById(bookingIds[id]);
-      console.log(updatedBookings);
       updatedBookings.status = status;
       await updatedBookings.save();
     }
-    // console.log("Number of documents updated:", updatedBookings);
 
     // Response
     return NextResponse.json(
@@ -50,7 +39,6 @@ export async function POST(req) {
       { status: 200 }
     );
   } catch (error) {
-    console.log(error);
     return NextResponse.json(
       { message: "An error occurred while registering the tourCompany." },
       { status: 500 }

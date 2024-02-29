@@ -44,6 +44,10 @@ const tourCompanySchema = new Schema(
       minlength: 5,
       unique: true,
     },
+    emailVerified: {
+      type: Boolean,
+      default: false,
+    },
   },
   { collection: "TourCompany", timestamps: true }
 );

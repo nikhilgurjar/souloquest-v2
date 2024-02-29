@@ -12,7 +12,6 @@ export async function GET(req) {
   try {
     const room_id = url.searchParams.get("room_id");
     const userId = await getDataFromToken(req);
-    console.log(room_id);
     if (!userId) {
       const loginUrl = new URL("/login", req.url);
       // Add ?from=/incoming-url to the /login URL
@@ -32,7 +31,6 @@ export async function GET(req) {
       { status: 200 }
     );
   } catch (error) {
-    console.log(error);
     return NextResponse.json({ error: error.message }, { status: 500 });
   }
 }

@@ -33,7 +33,9 @@ export async function GET(req) {
 
     return NextResponse.json({ bookingDetails: tour }, { status: 200 });
   } catch (error) {
-    console.log(error);
-    return NextResponse.json({ error: error.message }, { status: 500 });
+    return NextResponse.json(
+      { error: "something went wrong" },
+      { status: 400 }
+    );
   }
 }

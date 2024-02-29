@@ -30,11 +30,8 @@ export async function POST(req) {
       "destinations",
     ];
 
-    console.log("all fields present");
-
     const numDays = body.itenary.length;
     const tourId = uuidv4();
-    console.log(body);
     const destinations = flattenNames(body.destinations);
     const included = flattenNames(body.included);
     const notIncluded = flattenNames(body.notIncluded);
