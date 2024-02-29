@@ -1,3 +1,4 @@
+"use server";
 import { getJWTToken } from "@/lib/helper";
 import { connectMongoDB } from "@/lib/mongodb";
 import TourCompany from "@/models/TourCompany.model";
@@ -17,6 +18,13 @@ export async function POST(request) {
     if (!tourCompany) {
       return NextResponse.json(
         { error: "Company does not exist" },
+        { status: 400 }
+      );
+    }
+
+    if (!tourCompany.emailVerified) {
+      return NextResponse.json(
+        { error: "Email not verified" },
         { status: 400 }
       );
     }

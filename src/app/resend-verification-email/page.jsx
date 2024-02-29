@@ -1,16 +1,16 @@
+"use client";
 import React from "react";
 import Iconify from "@/components/iconify";
-import { EmailInboxIcon } from "@assets/assets/icons";
-import { Box, Card, Stack, Typography } from "@mui/material";
+import { Stack } from "@mui/material";
 import Link from "next/link";
-import React from "react";
 import MUILink from "@mui/material/Link";
-import FormProvider, { RHFCode, RHFTextField } from "@/components/hook-form";
+import FormProvider, { RHFTextField } from "@/components/hook-form";
 import * as Yup from "yup";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useSnackbar } from "@/components/snackbar";
 import useApi from "@/actions/useCompanyApi";
+import { LoadingButton } from "@mui/lab";
 
 const ResendVerificationEmail = () => {
   const { enqueueSnackbar } = useSnackbar();

@@ -2,6 +2,7 @@
 import { getDataFromToken, getJWTToken } from "@/lib/helper";
 import { connectMongoDB } from "@/lib/mongodb";
 import TourCompany from "@/models/TourCompany.model";
+import { NextResponse } from "next/server";
 
 connectMongoDB();
 
