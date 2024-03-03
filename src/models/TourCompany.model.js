@@ -36,13 +36,12 @@ const tourCompanySchema = new Schema(
     },
     instagramLink: {
       type: String,
-      minlength: 5,
-      unique: true,
+      // minlength: 5,
     },
     facebookLink: {
       type: String,
-      minlength: 5,
-      unique: true,
+      // minlength: 5,
+      // unique: false,
     },
     emailVerified: {
       type: Boolean,

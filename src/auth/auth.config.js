@@ -12,7 +12,7 @@ const authConfig = {
       clientSecret: process.env.GOOGLE_CLIENT_SECRET,
     }),
     Credentials({
-      id: "crendentials",
+      id: "credentials",
       name: "Credentials",
       async authorize(credentials) {
         await connectMongoDB();

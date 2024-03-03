@@ -48,12 +48,12 @@ const CompanyRegisterForm = () => {
     address: Yup.string()
       .required("Address is required")
       .min(5, "Address must be at least 5 characters long"),
-    instagramLink: Yup.string()
-      .url("Invalid Instagram link format")
-      .matches(
-        /(https?:\/\/)?(www\.)?instagram\.com\/\S+/,
-        "Must be a valid Instagram URL"
-      ),
+    instagramLink: Yup.string(),
+      // .url("Invalid Instagram link format")
+      // .matches(
+      //   /(https?:\/\/)?(www\.)?instagram\.com\/\S+/,
+      //   "Must be a valid Instagram URL"
+      // ),
     confirmPassword: Yup.string()
       .required("Confirm password is required")
       .oneOf([Yup.ref("password")], "Password's not match"),

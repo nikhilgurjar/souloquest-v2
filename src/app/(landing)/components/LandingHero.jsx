@@ -11,6 +11,7 @@ import {
 import Iconify from "@/components/iconify";
 import ImageComponent from "./ImageComponent";
 import { StyledRoot } from "./styles";
+import Link from "next/link";
 
 const LandingHero = () => {
   return (
@@ -56,11 +57,13 @@ const LandingHero = () => {
               justifyContent={{ xs: "center", md: "unset" }}
               sx={{ mt: 5 }}
             >
-              <Button variant="contained" color="primary" size="large">
-                Try For Free
-              </Button>
+              <Link href={"/register/company"}>
+                <Button variant="contained" color="primary" size="large">
+                  Try For Free
+                </Button>
+              </Link>
 
-              <Stack
+              {/* <Stack
                 direction="row"
                 alignItems="center"
                 sx={{ typography: "h6", background: "theme.secondary" }}
@@ -69,7 +72,7 @@ const LandingHero = () => {
                   <Iconify width={24} icon="carbon:play" />
                 </Fab>
                 See Our Work
-              </Stack>
+              </Stack> */}
             </Stack>
           </Grid>
 

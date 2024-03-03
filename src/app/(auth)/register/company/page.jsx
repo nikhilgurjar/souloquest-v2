@@ -28,7 +28,7 @@ const CompanyRegister = () => {
             {`Already have a account? `}
             <Link
               component={NextLink}
-              href="/login"
+              href="/login/company"
               variant="subtitle2"
               color="primary"
             >
