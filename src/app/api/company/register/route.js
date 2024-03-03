@@ -11,14 +11,7 @@ export async function POST(req) {
   try {
     const { name, email, instagramLink, address, password, phoneNumber } =
       await req.json();
-    if (
-      !name ||
-      !email ||
-      !password ||
-      !instagramLink ||
-      !address ||
-      !phoneNumber
-    ) {
+    if (!name || !email || !password || !address || !phoneNumber) {
       return NextResponse.json(
         { message: "Missing required fields." },
         { status: 400 }
@@ -26,13 +19,13 @@ export async function POST(req) {
     }
 
     const existingCompany = await TourCompany.findOne({
-      $or: [{ email }, { phoneNumber }, { instagramLink }],
+      $or: [{ email }, { phoneNumber }],
     });
     if (existingCompany) {
       return NextResponse.json(
         {
           message:
-            "Company already exists. Please make sure email, phoneNumber and instagramLink are unique.",
+            "Company already exists. Please make sure email, phoneNumber are unique.",
         },
         { status: 400 }
       );
@@ -78,6 +71,7 @@ export async function POST(req) {
 
     return response;
   } catch (error) {
+    console.log(error);
     return NextResponse.json(
       { message: "An error occurred while registering the tourCompany." },
       { status: 500 }
